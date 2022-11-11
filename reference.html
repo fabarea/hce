@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <title>Agence développement application web - Declic</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/morphext/morphext.css" rel="stylesheet" type="text/css">
+    <link href="vendor/animate.css/animate.min.css" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic'
+          rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="css/agency.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Declic</a>
+        <button aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                class="navbar-toggler navbar-toggler-right"
+                data-target="#navbarResponsive"
+                data-toggle="collapse"
+                type="button">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#agency">La société</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#references">Références</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#team">L'équipe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Header -->
+<header class="masthead">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-heading text-uppercase">Declic</div>
+            <div class="intro-lead-in">
+
+                <span id="js-rotating">
+qui ouvre des horizons,
+qui fait la différence,
+qui trace un chemin,
+qui met en mouvement,
+qui donne une raison,
+qui assure la réussite,
+qui réalise,
+qui embellit,
+qui enthousiasme,
+qui met sur les rails,
+                    </span>
+            </div>
+
+        </div>
+
+    </div>
+</header>
+
+
+<script>
+  const airtableToken = 'keykfjaWjIBK5SIGl';
+
+  function getReferenceData() {
+    return {
+      books: [],
+      isLoading: false,
+      init: async function () {
+        this.isLoading = true;
+        fetch(`https://api.airtable.com/v0/appnH1Q9lkZ39d8tG/References?api_key=${airtableToken}`)
+          .then(res => res.json())
+          .then(res => {
+            this.isLoading = false;
+            this.books = res.records.map(item => item.fields)
+          })
+
+        const result = await fetch('https://api.airtable.com/v0/appnH1Q9lkZ39d8tG/References/rec7kivG5YILaforl', {
+            headers: {
+              "Authorization": `Bearer ${airtableToken}`,
+            },
+          }
+        )
+
+        const reference = await result.json()
+        console.log(reference)
+      }
+    }
+  }
+</script>
+
+<!-- Services -->
+<section class="bg-light" id="agency">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">La société</h2>
+                <h3 class="section-subheading text-muted">Un outil pour entreprendre</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div x-data="getReferenceData()">
+                    <div x-show="isLoading">Loading...</div>
+                    <ul>
+                        <template x-for="book in books">
+                            <li x-text="book.Name"></li>
+                        </template>
+                    </ul>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8" style="text-align: right">
+                <a href="mailto:contact@declic.africa">contact@declic.africa</a>
+                &nbsp; &nbsp; &bull; &nbsp; &nbsp;
+                <a href="tel:+22678876787">+226 64 94 80 00</a>
+                &nbsp; &nbsp; &bull; &nbsp; &nbsp;
+                Declic Sàrl <span id="current-year"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Contact form JavaScript -->
+<script src="js/jqBootstrapValidation.js"></script>
+<script src="js/contact_me.js"></script>
+
+<script src="vendor/morphext/morphext.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="js/agency.min.js"></script>
+
+</body>
+
+</html>
