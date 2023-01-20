@@ -20,7 +20,7 @@ git commit -m "Add new coworker"
 git push --set-upstream origin feature/add-new-coworker
 ```
 
-**[View Live Preview](https://blackrockdigital.github.io/startbootstrap-agency/)**
+**[View Live Preview](https://hce-africa.netlify.app/)**
 
 ## Status
 
